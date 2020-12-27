@@ -1,0 +1,1 @@
+python_add_module(pylbc pylbc.cpp ${LBC_SOURCE_FILES})

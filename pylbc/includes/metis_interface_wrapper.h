@@ -14,14 +14,10 @@
 #include "lbc/utils/includes/metis_interface.h"
 
 #include "pylbc/includes/defwrappers.h"
+#include "pylbc/includes/destroy_manager.h"
 
 namespace bp = boost::python;
 namespace np = boost::python::numpy;
-
-void destroy_manager_cobject_int_array(PyObject* obj) {
-  int* a = reinterpret_cast<int*>(PyCapsule_GetPointer(obj, nullptr));
-  delete [] a;
-}
 
 np::ndarray metis_partition_general_wrapper(CSCWrapper& A) {
   int* perm = nullptr;
@@ -31,7 +27,7 @@ np::ndarray metis_partition_general_wrapper(CSCWrapper& A) {
   // created in metis_perm_general
   bp::handle<> h(::PyCapsule_New(
     (void*) perm, nullptr,
-    (PyCapsule_Destructor) &destroy_manager_cobject_int_array)
+    (PyCapsule_Destructor) &destroy_manager_carray<int>)
   );
   np::dtype dt = np::dtype::get_builtin<int>();
   bp::tuple shape = bp::make_tuple(A.n);

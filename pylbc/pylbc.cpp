@@ -52,4 +52,9 @@ BOOST_PYTHON_MODULE(pylbc) {
   def("metis_perm_general", metis_partition_general_wrapper);
 
   def("sptrsv_csr", sptrsv_csr_wrapper);
+  def("sptrsv_csr_levelset", sptrsv_csr_levelset_wrapper);
+  def("sptrsv_csr_lbc", sptrsv_csr_lbc_wrapper);
+
+  def("build_set_levelset_csc", build_set_levelset_csc_wrapper);
+  def("build_set_lbc_csr", build_set_lbc_csr_wrapper);
 }

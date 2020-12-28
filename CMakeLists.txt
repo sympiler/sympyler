@@ -54,7 +54,8 @@ set(LBC_INCLUDE_DIRS
 
 set(LBC_SOURCE_FILES
         ${CMAKE_CURRENT_LIST_DIR}/lbc/example/sptrsv.cpp
-        ${CMAKE_CURRENT_LIST_DIR}/lbc/utils/metis_interface.cpp)
+        ${CMAKE_CURRENT_LIST_DIR}/lbc/utils/metis_interface.cpp
+        ${CMAKE_CURRENT_LIST_DIR}/lbc/utils/sparse_inspector.cpp)
 
 add_subdirectory(lbc)
 

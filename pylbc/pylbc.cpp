@@ -2,7 +2,6 @@
 // Created by Shujian Qian on 2020-12-24.
 //
 #include <string>
-#include <iostream>
 
 #include <boost/python.hpp>
 #include <boost/python/numpy.hpp>
@@ -13,32 +12,9 @@
 #include "pylbc/includes/metis_interface_wrapper.h"
 #include "pylbc/includes/sparse_blas_lib_wrapper.h"
 #include "pylbc/includes/sparse_utilities_wrapper.h"
-//#include "pylbc/includes/sptrsv_demo_utils_wrapper.h"
 
 namespace bp = boost::python;
 namespace np = boost::python::numpy;
-
-/*
-int f (np::ndarray& x, np::ndarray& y) {
-  std::cout << std::hex << (unsigned long int) &x << std::endl;
-  std::cout << std::hex << (unsigned long int) x.get_data() << std::endl;
-  std::cout << std::hex << (unsigned long int) &y << std::endl;
-  std::cout << std::hex << (unsigned long int) y.get_data() << std::endl;
-  
-  auto x_data = reinterpret_cast<double*>(x.get_data());
-  auto y_data = reinterpret_cast<double*>(y.get_data());
-  for (int i = 0; i < 10; ++i) {
-    std::cout << x_data[i] << "  ";
-  }
-  std::cout << std::endl;
-  for (int i = 0; i < 10; ++i) {
-    std::cout << y_data[i] << "  ";
-  }
-  std::cout << std::endl;
-
-  return (int) (x.shape(0) + y.shape(0));
-}
-*/
 
 BOOST_PYTHON_MODULE(pylbc) {
   using namespace boost::python;
@@ -60,11 +36,6 @@ BOOST_PYTHON_MODULE(pylbc) {
     .def_readonly("n",   &CSRWrapper::n)
     .def_readonly("nnz", &CSRWrapper::nnz)
   ;
-//
-//  class_<SptrsvSerialWrapper>("SptrsvSerial", init<CSRWrapper&, CSCWrapper&, np::ndarray&, std::string&>())
-//    .def("evaluate", &SptrsvSerialWrapper::evaluate)
-//    .def("solution")
-//  ;
 
   CSCWrapper* (*make_half_1)(CSCWrapper&)       = &make_half_wrapper;
   CSCWrapper* (*make_half_2)(CSCWrapper&, bool) = &make_half_wrapper;
@@ -81,5 +52,4 @@ BOOST_PYTHON_MODULE(pylbc) {
   def("metis_perm_general", metis_partition_general_wrapper);
 
   def("sptrsv_csr", sptrsv_csr_wrapper);
-//  def("f", f);
 }

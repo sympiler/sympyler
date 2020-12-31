@@ -41,7 +41,7 @@ void sptrsv_csr_lbc_wrapper (
   CSRWrapper& L, np::ndarray& b,
   int level_no,
   np::ndarray& level_ptr,
-  np::ndarray& par_ptr,
+  np::ndarray& part_ptr,
   np::ndarray& partition
 ) {
   sym_lib::sptrsv_csr_lbc(
@@ -49,12 +49,12 @@ void sptrsv_csr_lbc_wrapper (
     reinterpret_cast<double*>(b.get_data()),
     level_no,
     reinterpret_cast<int*>(level_ptr.get_data()),
-    reinterpret_cast<int*>(par_ptr.get_data()),
+    reinterpret_cast<int*>(part_ptr.get_data()),
     reinterpret_cast<int*>(partition.get_data())
   );
 }
 
-bp::tuple build_set_levelset_csc_wrapper (CSCWrapper& L) {
+boost::python::tuple build_set_levelset_csc_wrapper (CSCWrapper& L) {
   int* level_set,* level_ptr;
   int level_no;
   CSC* L_csc = static_cast<CSC*>(&L);

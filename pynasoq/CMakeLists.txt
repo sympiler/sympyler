@@ -1,0 +1,1 @@
+python_add_module(pynasoq pynasoq.cpp)

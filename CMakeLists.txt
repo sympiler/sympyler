@@ -57,7 +57,12 @@ set(LBC_SOURCE_FILES
         ${CMAKE_CURRENT_LIST_DIR}/lbc/utils/metis_interface.cpp
         ${CMAKE_CURRENT_LIST_DIR}/lbc/utils/sparse_inspector.cpp)
 
+set(NASOQ_INCLUDE_DIRS
+        ${CMAKE_CURRENT_LIST_DIR}/nasoq
+        ${CMAKE_CURRENT_LIST_DIR}/nasoq/include)
+
 add_subdirectory(lbc)
+add_subdirectory(nasoq)
 
 include_directories(
         ${Boost_INCLUDE_DIRS}
@@ -65,12 +70,16 @@ include_directories(
         ${OpenMP_CXX_INCLUDE_DIRS}
         ${PYLBC_INCLUDE_DIRS}
         ${LBC_INCLUDE_DIRS}
+        ${NASOQ_INCLUDE_DIRS}
         ${METIS_INCLUDES})
 
-link_libraries(lbc
+link_libraries(
+        lbc
+        nasoq
         ${OpenMP_CXX_LIBRARIES}
         ${METIS_LIBRARIES}
         ${Boost_LIBRARIES}
         ${PYTHON_LIBRARIES})
 
 add_subdirectory(pylbc)
+add_subdirectory(pynasoq)

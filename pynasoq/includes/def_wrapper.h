@@ -49,6 +49,20 @@ struct CSCWrapper : public format::CSC {
   bool equality_check(const CSCWrapper& in_c) {
     return CSC::equality_check(static_cast<const format::CSC*>(&in_c));
   }
+
+  /* Not exposed */
+
+  // Internal helper function that creates a copy of CSCWrapper from CSC
+  explicit CSCWrapper(const format::CSC& rhs)
+  : CSC(rhs.m, rhs.n, rhs.nnz) {
+    for (int j = 0; j < rhs.n + 1; ++j) {
+      p[j] = rhs.p[j];
+    }
+    for (int j = 0; j < rhs.nnz; ++j) {
+      i[j] = rhs.i[j];
+      x[j] = rhs.x[j];
+    }
+  }
 };
 
 struct DenseWrapper : public format::Dense {
@@ -65,6 +79,9 @@ struct DenseWrapper : public format::Dense {
   bool is_finite() {
     return Dense::is_finite();
   }
+
+  /* Not exposed */
+  explicit DenseWrapper(const format::Dense& rhs) : Dense(rhs) {}
 };
 
 #endif //SYMPYLER_DEF_WRAPPER_H

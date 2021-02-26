@@ -25,4 +25,28 @@ solver.max_iter_nas = max_iter_nas
 
 solver.solve()
 
-solver.print_log()
+print(solver.get_log())
+
+
+# Here I'm getting copies the CSC and Dense matrices from the QPFormatConverter
+# but they can also be directly instantiated from numpy arrays.
+H = QPFC.get_H_copy()
+A = QPFC.get_A_copy()
+C = QPFC.get_C_copy()
+q = QPFC.get_q_copy()
+b = QPFC.get_b_copy()
+d = QPFC.get_d_copy()
+
+print(H)
+print(q)
+
+solver_from_matrix = Nasoq(H, q, A, b, C, d)
+
+solver_from_matrix.diag_perturb = diag_perturb
+solver_from_matrix.eps_abs = eps
+solver_from_matrix.max_iter = inner_iter
+solver_from_matrix.stop_tol = stop_tol
+solver_from_matrix.max_iter_nas = max_iter_nas
+
+solver_from_matrix.solve()
+print(solver_from_matrix.get_log())

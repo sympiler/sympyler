@@ -3,4 +3,4 @@
 	url = https://github.com/sympiler/lbc.git
 [submodule "nasoq"]
 	path = nasoq
-	url =https://github.com/sympiler/nasoq.git 
+	url = https://github.com/sympiler/nasoq.git 

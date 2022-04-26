@@ -1,11 +1,11 @@
 # sympyler
-A python interface to [sympiler/lbc](https://github.com/sympiler/lbc) sparse triangular solve implementation.
+This is a work in progress to create a python interface to sympiler and NASOQ packages. 
 ## Boost library
 This python interface is based on the boost::python library. The build is tested on version 1.75.0.
 
 To install on macOS, simply used
 ```
-brew install boost boost-python
+brew install boost boost-python3
 ```
 On Ubuntu, use
 ```
